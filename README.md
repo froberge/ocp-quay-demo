@@ -78,7 +78,7 @@ In this demo we wil be using a Standalone instance installation option for OpenS
     oc patch bucketclass noobaa-default-bucket-class --patch '{"spec":{"placementPolicy":{"tiers":[{"backingStores":["noobaa-pv-backing-store"]}]}}}' --type merge -n openshift-storage
     ```
 
-### Noobaa admin Interface
+#### Noobaa admin Interface
 
 You can now access the nooba interface. To do so you need the following information. These are found under the opensift-storage project.
 
@@ -114,19 +114,20 @@ You can now access the nooba interface. To do so you need the following informat
 ![QUAY1](docs/images/quay-operator-2.png)
 
 
-
 * You can access Quay using the different URL given
     * For the config portion use the Config Editor Endpoint route
     * For the repository use the Registry Endpoint route.
 
 
-### Connecting to Quay Registry.
+## Connecting to Quay Registry
 
 :warning: By default there is no user created when you install Quay.  You either need to link an identify provider or create Account.
 
-#### Create and Account
+There is 2 options, either you create a user directly into quay, or you can connect to an external OAuth such as Red Hat, GitHub, Google Authentication and more.
 
-For the purpose we will be creating an account.
+In this demo we will investigate 2 different options. 
+
+### Option 1: Create an account in Quay
 
 1. Connect to the Quay Registry using the url provided in the Registry Endpoint. Create a user __Admin/admin001__
 ![CreateAccount](docs/images/createAccount.png)
@@ -134,7 +135,39 @@ For the purpose we will be creating an account.
 1. Sign in using the new user you have just created.
 ![landingpage](docs/images/landingPage.png)
 
-#### Test adding images and pulling images
+
+### Option 2: Connect Quay to RedHat SSO.
+
+In other to do that you need to have an instance of Red Hat SSO running.
+
+* In Red Hat SSO
+    1. Create a Realm.  __Name: Quay__
+    1. Create a user.
+    1. Create a clients.
+        * __Client ID: quay-demo
+        * __AccessType: confidential
+        * Validate Redicect URis: Use the callback from the Quay Config with wildcard. _ex: https://thecat-registry-quay-quay-enterprise.apps.cluster-vckpj.vckpj.sandbox1879.opentlc.com/oauth2/rhsso/*_
+
+* In Quay Config Editor
+    1. Select Add OIDC Provider
+        ![oidc-provider](docs/images/oidc-provider.png)
+
+        Enter the name __rhsso__
+        ![oidc-provider-name](docs/images/oidc-provider-name.png)
+    1. Enter the correct information. As per that example.
+        ![config-rhsso](docs/images/config-rhsso.png)
+
+    1. Click validate config at the end of the page
+        ![validate-config.png](docs/images/validate-config.png)
+    1. Click Reconfigure Quay
+        ![reconfig-quay](docs/images/reconfig-quay.png)
+
+* You are done, you should now be able to connect with RH SSO
+    ![signin-sso](docs/images/signin-sso.png)
+    
+
+
+## Test adding images and pulling images
 
 1. Add a new images by copying an image from a another locations. An images with errors is uses, this allow us to validate that clair is also install. To copy the image we will use skopeo.
 
