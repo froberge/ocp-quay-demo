@@ -67,7 +67,7 @@ In this demo we wil be using a Standalone instance installation option for OpenS
         resources:
           requests:
             storage: 50Gi 
-    type: pv-pool
+      type: pv-pool
     ```
 1. Apply the configuration with the following command:
     ```
