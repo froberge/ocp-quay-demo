@@ -16,7 +16,7 @@ This repository shows how to install Quay in Openshift using the different Opera
 In this demo we wil be using a Standalone instance installation option for OpenShift Data Foundation. For a production deployment we should installed with High Availability. Refer to the [official documentation](https://access.redhat.com/documentation/en-us/red_hat_openshift_data_foundation/4.9)
 
 
-* From the Operator Hub. Fid the OpenShift Data Foundation and client install. Leave eaverything as default.
+* From the Operator Hub. Find the OpenShift Data Foundation and client install. Leave eaverything as default.
 ![ODF](docs/images/install-odf.png)
 
 
