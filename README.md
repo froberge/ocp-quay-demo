@@ -107,7 +107,7 @@ You can now access the nooba interface. To do so you need the following informat
 
     * Create a Quay Registry
     * Name: thecat-registry
-    :warning: got to the Yaml view and remove everyting from spec down.
+    * :warning: go to the Yaml view and remove everyting from spec down.
     * Wait for a few minutes to finish configurations.
 
 * After a few minutes all should be started and configure
